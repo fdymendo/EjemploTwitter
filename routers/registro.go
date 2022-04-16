@@ -21,7 +21,7 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(t.Password) == 6 {
+	if len(t.Password) < 6 {
 		http.Error(w, "Debe especificar una contraseña de al menos 6 caracteres", 400)
 		return
 	}
@@ -38,7 +38,7 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Ocurrio un error al intentar realizar el registro de usuario"+err.Error(), 400)
 		return
 	}
-	if status == false {
+	if !status {
 		http.Error(w, "No se ha logrado insertar el registro del usuario", 400)
 		return
 	}
